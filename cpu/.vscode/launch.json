@@ -6,7 +6,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/${workspaceFolderBasename}",
-      "args": ["src/config/cpu.config","1"],
+      "args": ["${input:getID}"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
@@ -25,5 +25,13 @@
       ],
       "preLaunchTask": "build"
     }
-  ]
+  ],
+  "inputs":[
+    {
+        "id": "getID",
+        "type": "promptString",
+        "description": "Ingresa el ID de la CPU",
+        "default": "1"
+    }
+     ]
 }
