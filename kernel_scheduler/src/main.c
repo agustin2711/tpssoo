@@ -7,6 +7,7 @@
 #include "../../utils/src/sockets/networking/hilos.h"
 #include "networking/protocolo.h"
 #include <pthread.h>
+#include "networking/fd.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +36,9 @@ int main(int argc, char *argv[])
         log_error(logger, "Error: No se pudo cargar la configuracion correctamente desde %s", argv[1]);
         return EXIT_FAILURE;
     }
+
+    // Inicializamos las conexiones en -1 o NULL
+    inicializar_conexiones_kernel_scheduler();
 
     // ----------------------------------------------------------------------------------------------------------------------------
     // ######################################################################

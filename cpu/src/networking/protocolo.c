@@ -1,6 +1,7 @@
 #include "protocolo.h"
 #include "../../../utils/src/sockets/networking/protocolo.h"
 #include "../../../utils/src/sockets/networking/sockets.h"
+#include "fd.h"
 void *iniciar_cliente_Cpu_KernelScheduler(void *void_args)
 {
     t_conexion_cliente_args *args = (t_conexion_cliente_args *)void_args;
@@ -16,6 +17,8 @@ void *iniciar_cliente_Cpu_KernelScheduler(void *void_args)
         if (realizar_handshake(fd, "CPU", args->logger) == 0)
         {
             log_info(args->logger, "Handshake con Kernel Scheduler completado exitosamente.");
+            conexiones_cpu.fd_kernel_scheduler = fd;
+            log_info(args->logger, "Se guardo el fd: %d del cliente Kernel Scheduler", conexiones_cpu.fd_kernel_scheduler);
         }
         else
         {
@@ -47,6 +50,8 @@ void *iniciar_cliente_Cpu_MemoryStick(void *void_args)
         if (realizar_handshake(fd, "CPU", args->logger) == 0)
         {
             log_info(args->logger, "Handshake con Memory Stick completado exitosamente.");
+            dictionary_put(conexiones_cpu.lista_memory_stick, "MemoryStick", &fd);
+            log_info(args->logger, "Se guardo el fd: %d del cliente Memory Stick", *(int *)dictionary_get(conexiones_cpu.lista_memory_stick, "MemoryStick"));
         }
         else
         {
@@ -78,6 +83,8 @@ void *iniciar_cliente_Cpu_MemoryKernel(void *void_args)
         if (realizar_handshake(fd, "CPU", args->logger) == 0)
         {
             log_info(args->logger, "Handshake con Memory Kernel completado exitosamente.");
+            conexiones_cpu.fd_kernel_memory = fd;
+            log_info(args->logger, "Se guardo el fd: %d del cliente Kernel Memory", conexiones_cpu.fd_kernel_memory);
         }
         else
         {

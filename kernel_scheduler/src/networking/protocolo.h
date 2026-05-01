@@ -9,7 +9,7 @@
 #include <commons/log.h>
 #include "../../../utils/src/sockets/networking/hilos.h"
 #include "../../../utils/src/sockets/networking/protocolo.h"
-
 void *iniciar_cliente_KernelScheduler(void *void_args);
 void *atender_cliente_kernel_scheduler(void *void_args);
+void guardar_fd_cliente(char *nombre_cliente, int fd, t_log *logger);
 #endif

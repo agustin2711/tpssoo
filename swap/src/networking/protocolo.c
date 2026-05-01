@@ -1,6 +1,7 @@
 #include "protocolo.h"
 #include "../../../utils/src/sockets/networking/protocolo.h"
 #include "../../../utils/src/sockets/networking/sockets.h"
+#include "fd.h"
 void *iniciar_cliente_Swap_Kernel_Memory(void *void_args)
 {
     t_conexion_cliente_args *args = (t_conexion_cliente_args *)void_args;
@@ -16,6 +17,8 @@ void *iniciar_cliente_Swap_Kernel_Memory(void *void_args)
         if (realizar_handshake(fd, "Swap", args->logger) == 0)
         {
             log_info(args->logger, "Handshake con Kernel Memory completado exitosamente.");
+            conexiones_swap.fd_kernel_memory = fd;
+            log_info(args->logger, "Conexión con Kernel Memory establecida en el fd %d.", fd);
         }
         else
         {

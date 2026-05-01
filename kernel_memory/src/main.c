@@ -7,6 +7,7 @@
 #include "../../utils/src/sockets/networking/hilos.h"
 #include "networking/protocolo.h"
 #include <pthread.h>
+#include "networking/fd.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +33,9 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    // Inicializamos las conexiones en -1 o NULL
+    inicializar_conexiones_kernel_memory();
+
     // ----------------------------------------------------------------------------------------------------------------------------
     // ######################################################################
     // ################## CONEXION DE CLIENTE Y SERVIDOR ####################
@@ -55,7 +59,7 @@ int main(int argc, char *argv[])
     // ######################################################################
     // -----------------------------------------------------------------------------------------------------------------------------
 
-        pthread_join(th_servidor, NULL);
+    pthread_join(th_servidor, NULL);
 
     // LIMPIEZA
     destruir_config(config);

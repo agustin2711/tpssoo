@@ -9,6 +9,6 @@
 #include <commons/log.h>
 #include "../../../utils/src/sockets/networking/hilos.h"
 #include "../../../utils/src/sockets/networking/protocolo.h"
-
+void guardar_fd_cliente(char *nombre_cliente, int fd, t_log *logger);
 void *atender_cliente_kernel_memory(void *void_args);
 #endif

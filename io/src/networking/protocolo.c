@@ -1,6 +1,7 @@
 #include "protocolo.h"
 #include "../../../utils/src/sockets/networking/protocolo.h"
 #include "../../../utils/src/sockets/networking/sockets.h"
+#include "fd.h"
 void *iniciar_cliente_Io_KernelScheduler(void *void_args)
 {
     t_conexion_cliente_args *args = (t_conexion_cliente_args *)void_args;
@@ -13,9 +14,11 @@ void *iniciar_cliente_Io_KernelScheduler(void *void_args)
     if (fd != -1)
     {
 
-        if (realizar_handshake(fd, "IO", args->logger) == 0)
+        if (realizar_handshake(fd, "IO_STDIN", args->logger) == 0)
         {
             log_info(args->logger, "Handshake con Kernel Scheduler completado exitosamente.");
+            conexiones_io.fd_kernel_scheduler = fd;
+            log_info(args->logger, "Se guardo el fd: %d del cliente Kernel Scheduler", conexiones_io.fd_kernel_scheduler);
         }
         else
         {

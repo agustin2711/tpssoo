@@ -12,4 +12,5 @@
 
 void *iniciar_cliente_Memory_Stick_Memory_Kernel(void *void_args);
 void *atender_cliente_Memory_Stick_Cpu(void *void_args);
+void guardar_fd_cliente(char *nombre_cliente, int fd, t_log *logger);
 #endif
