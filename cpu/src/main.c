@@ -6,22 +6,29 @@
 #include "networking/protocolo.h"
 #include "../../utils/src/sockets/networking/protocolo.h"
 #include "../../utils/src/sockets/networking/hilos.h"
+#include "../../cpu/src/logger/logger.h"
+#include "../../cpu/src/registros/registros.h"
 int main(int argc, char *argv[])
 {
+    char* IDCPU = argv[1];
     //-----------------------------------------------------------------------------------------------------------------------------
     // ######################################################################
     // ############### CONFIGURACION Y PROCESOS INICIALES ###################
     // ######################################################################
     //-----------------------------------------------------------------------------------------------------------------------------
     // Creamos el Logger
-    t_log *logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_INFO);
+
+    t_log *logger = CrearLogger(IDCPU);
     if (argc < 2)
     {
         log_info(logger, "Error: Falta el path del archivo de configuracion.");
         return EXIT_FAILURE;
     }
+        log_info(logger,"hola soy el CPU Numero: %s", argv[1]);
     // Cargamos la configuración
-    t_config_cpu *config_cpu = iniciar_config_cpu(argv[1]);
+    
+    t_config_cpu *config_cpu = iniciar_config_cpu(IDCPU);
+
     // Validamos la configuración
     if (config_cpu == NULL)
     {
@@ -44,7 +51,7 @@ int main(int argc, char *argv[])
 
     // Iniciamos el cliente de memoria
     pthread_create(&th_cliente_Kernel_Scheduler, NULL, iniciar_cliente_Cpu_KernelScheduler, (void *)args_cliente);
-    log_info(logger, "Hilo Cliente Scheduler lanzado...");
+    log_info(logger, "Hilo Cliente Scheduler Kerel...");
 
     // --- CONEXIÓN A MEMORY STICK ---
     // Creamos y cargamos los argumentos
@@ -79,6 +86,8 @@ int main(int argc, char *argv[])
     destruir_config_cpu(config_cpu);
     log_destroy(logger);
     free(args_cliente);
+
+    while(true){};
 
     return 0;
 }

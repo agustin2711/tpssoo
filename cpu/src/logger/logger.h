@@ -1,0 +1,1 @@
+t_log* CrearLogger(char* nombre);

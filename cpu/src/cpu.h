@@ -15,6 +15,8 @@ typedef struct {
     char* puerto_scheduler;
 } t_config_cpu;
 
+
+
 //funcion para finalizar
 void terminar_programa (t_log*logger, t_config_cpu*config);
 

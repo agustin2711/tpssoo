@@ -1,7 +1,11 @@
 #include "config_cpu.h"
 
-t_config_cpu *iniciar_config_cpu(char *path_config)
+t_config_cpu *iniciar_config_cpu(char *IdCpu)
 {
+
+    char path_config[50];
+    sprintf(path_config,"src/config/cpu%s.config",IdCpu);
+
     t_config *config_temporal = config_create(path_config);
 
     if (config_temporal == NULL)
